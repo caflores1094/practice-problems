@@ -1,0 +1,81 @@
+Problems:
+
+1) Find the nth element from the end of a singly linked list, constant space, linear time:
+
+  A) iterative A:
+      -The TRICK: use 2 POINTERS
+      -one will iterate through normally, one by one until we find the end (null)
+      -The other will start it's iteration once the normal pointer has counted n elements
+      -both will stop once Pointer 1 reaches null, 
+          ==> the Data at Pointer 2's node is the answer
+            --------------------------------------------
+  B) Recursive:
+      - Base Case:
+        If pointer is pointing on the final element, return 0
+      - Recursive Case:
+        Make sure to keep a tracker to keep count and see which node you are at
+        - Set i = func(currentNode.next, k) + 1
+        - If i === k (where k is the kth element you want) then return/print that node's data
+        - Else return i
+      Explanation:
+        - each return of i serves to give the i's levels about it values to eventually reach 
+          k. It is finally returned when it equals
+        - This chain of returning is started when a node is the final node and the first 0 is returned
+        
+2) Find out if a linked list is cyclical or acyclical in linear time and constant space
+  -  2 POINTERS
+  - one starts on the second element, other on the head
+  - the one at the head is deemed the slower one, the other is fast
+  - iterate through the list (forever) iterating at different speeds
+  - if the fast one ever equals the slow one, or if it is ever behind the slow one
+    (meaning that fast.next === slow) then it is cyclical
+  - if the fast one, or fast.next, is ever equal to null, youre done it's acyclical
+
+Concepts:
+
+*) This binding with ARROW FUNCTION:
+  - () => { }
+    - these will never create their own this binding. The "this" will refer to whatever
+      "this" was created in the previous scope
+    - sometimes the previous scope is the global "this" because the arrow function is by itself
+    - if the arrow function is within another function, the "this" will refer to the outer function's
+      "this"
+
+*) Stack: LIFO
+  -examples: undo in text editor
+  - JS call stack:
+       -----------
+       - a function can invoke another function and that one yet another
+       - the 1st function will not return its value and complete until the other
+          two are done doing their things, even though they were invoked after 
+*) Big O
+  - amortized linear: 
+    ----------------
+        - average occurances
+        - ex: resizing an array ever x times you perform an action, if the resizing
+              happens infrequent enough, and the rest of the actions are considered
+              linear, then it is amortized linear
+  - average case:
+    -------------
+        - solution found with half of the elements checked
+          ex: O ( n^2 / 2)  
+  - common patterns:
+    ----------------
+        -* n^2 + (n-1) + (n-2) ... + 1 = O(n^2/2 + n/2)
+                                        ------
+                                      = O(n^2)
+                                        ------
+                                ------
+        -* 1 + 2 + 3 + ... + n = O(n^2)
+                                ------
+*) Recursion notes:
+  -------
+  Draft 1
+  -------
+        1) find a base case, figure out how you can get to that point
+        2) Think about your function's 1st call, think about what future events you can depend on to satisfy this
+          - Find a need that your call needs, leave it open, try to fill it as you reach the end of the 
+             call stack (base case)
+          - The need will be filled for each following call from the call stack
+
+
