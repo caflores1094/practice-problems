@@ -37,6 +37,17 @@ var bstPreorderPrint = function(treeHead){
     bstPreorderPrint(treeHead.right);
   }
 }
+var bstPostorderPrint = function(treeHead){
+  if(treeHead !== null){
+    //recurse on left child
+    bstPostorderPrint(treeHead.left);
+    //print the right child
+    bstPostorderPrint(treeHead.right);
+    //print current node
+    console.log(treeHead.value);
+  }
+}
 
 // bstInorderPrint(bstHead);
-bstPreorderPrint(bstHead);
+// bstPreorderPrint(bstHead);
+// bstPostorderPrint(bstHead);
