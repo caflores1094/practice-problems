@@ -38,8 +38,47 @@ minHeap.prototype.bubbleUp = function(current){
   }
 }
 
+minHeap.prototype.pop = function(){
+  var result = this.heap[0];
+
+  //move the last element to the front
+  this.heap[0] = this.heap.pop();
+
+  //sink down the new lead element to find it's proper spot
+  this.sinkDown(0);
+
+  return result;
+}
+
+minHeap.prototype.sinkDown = function(currIndex){
+  //check current, left and right, find the smaller of the three, swap with that one
+  var leftcurrIndex = 2*currIndex + 1;
+  var rightcurrIndex = 2*currIndex + 2;
+  var current = this.heap[currIndex];
+  var left = this.heap[2*currIndex + 1] || null;
+  var right = this.heap[2*currIndex + 2] || null;
+
+  if(left !== null && left < current && left < right){
+    //swap left and current
+    var temp = current;
+    this.heap[currIndex] = left;
+    this.heap[leftcurrIndex] = temp;
+    this.sinkDown(leftcurrIndex);
+  }
+  if(right !== null && right < current && right < left ){
+    //swap right and current
+    var temp = current;
+    this.heap[currIndex] = right;
+    this.heap[rightcurrIndex] = temp;
+    this.sinkDown(rightcurrIndex);
+  }
+
+}
+
 var myHeap = new minHeap([1, 3, 4, 6, 9, 5, 10]);
 
 myHeap.insert(0);
-myHeap.inOrderPrint();
-console.log(myHeap.heap)
+console.log(myHeap.heap);
+
+console.log(myHeap.pop());
+console.log(myHeap.heap);
